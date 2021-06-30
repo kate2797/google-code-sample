@@ -14,3 +14,8 @@ class Utils:
             return videos[random.randint(0, len(videos) - 1)]
         else:  # If the list is empty
             return None
+
+    @staticmethod
+    def format_tags(video):
+        """Takes video objects, formats its tags."""
+        return str(list(video.tags)).replace("'", "").replace(",", "")
