@@ -72,14 +72,14 @@ class VideoPlayer:
     def continue_video(self):
         """Resumes playing the current video."""
         if not self._currently_playing_video:
-            print("Cannot pause video: No video is currently playing")
+            print("Cannot continue video: No video is currently playing")
         elif self._currently_paused_video is None:
             print("Cannot continue video: Video is not paused")
         else:
             print(f"Continuing video: {self._currently_paused_video.title}")
             self._currently_paused_video = None
 
-    def show_playing(self):  # TODO – handle the same video
+    def show_playing(self):
         if not self._currently_playing_video:
             print("No video is currently playing")
         elif self._currently_paused_video:
@@ -87,7 +87,7 @@ class VideoPlayer:
                 self._currently_paused_video)  # Get the tags
             print(
                 f"Currently playing: {self._currently_paused_video.title} ({self._currently_paused_video.video_id}) {formatted_tags} - PAUSED")
-        else:
+        else:  # Normal case
             formatted_tags = Utils.format_tags(
                 self._currently_playing_video)
             print(
