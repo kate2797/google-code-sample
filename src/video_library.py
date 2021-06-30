@@ -32,6 +32,9 @@ class VideoLibrary:
         """Returns all available video information from the video library."""
         return list(self._videos.values())
 
+    def get_all_video_urls(self):
+        return [video.video_id for video in self.get_all_videos()]
+
     def get_video(self, video_id):
         """Returns the video object (title, url, tags) from the video library.
 
