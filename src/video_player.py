@@ -86,7 +86,6 @@ class VideoPlayer:
     def show_playing(self):
         if not self._currently_playing_video:
             print("No video is currently playing")
-
         elif self._currently_paused_video is self._currently_playing_video:
             formatted_tags = Utils.format_tags(
                 self._currently_paused_video)  # Get the tags
@@ -148,11 +147,7 @@ class VideoPlayer:
                 print(f" {playlist_name}")
 
     def show_playlist(self, playlist_name):
-        """Display all videos in a playlist with a given name.
-
-        Args:
-            playlist_name: The playlist name.
-        """
+        """Display all videos in a playlist with a given name."""
         if playlist_name.lower() not in self._playlists_names_cleaned:
             print(
                 f"Cannot show playlist {playlist_name}: Playlist does not exist")
@@ -174,7 +169,26 @@ class VideoPlayer:
             playlist_name: The playlist name.
             video_id: The video_id to be removed.
         """
-        print("remove_from_playlist needs implementation")
+        videos = self._playlists[self._playlists_names_cleaned.index(
+            playlist_name.lower())].get_all_videos()
+        is_in_videos = False
+        for video in videos:
+            if video.video_id == video_id:
+                is_in_videos = True
+        if playlist_name.lower() not in self._playlists_names_cleaned and is_in_videos == True:
+            print(
+                f"Cannot remove video from {playlist_name}: Playlist does not exist")
+        elif playlist_name.lower() not in self._playlists_names_cleaned:
+            print(
+                f"Cannot remove video from {playlist_name}: Playlist does not exist")
+        elif is_in_videos == True:
+            print(
+                f"Cannot remove video from {playlist_name}: Video is not in playlist")
+        else:
+            for video in videos:
+                if video.video_id == video_id:
+                    print(f"Removed video from {playlist_name}: {video.title}")
+                    videos.remove(video)
 
     def clear_playlist(self, playlist_name):
         """Removes all videos from a playlist with a given name.
